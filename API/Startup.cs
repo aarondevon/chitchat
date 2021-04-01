@@ -50,6 +50,7 @@ namespace API
 
             app.UseAuthorization();
 
+            app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
             app.UseEndpoints(endpoints =>
