@@ -19,9 +19,11 @@ function ChatBox(props) {
   return (
     <div>
       <h3>Chat Box</h3>
-      <ul className="list-group border">
-        {props.messages.length > 1 && displayMessages()}
-      </ul>
+      <div id="messages-container" className="">
+        <ul id="messages" className="list-group border">
+          {displayMessages()}
+        </ul>
+      </div>
     </div>
   );
 }
