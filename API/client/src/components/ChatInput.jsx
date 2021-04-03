@@ -1,18 +1,27 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/button-has-type */
-import React from 'react';
+import React, { useState } from 'react';
 
 function ChatInput(props) {
+  const [message, setMessage] = useState('');
+
+  const handleMessageInput = (event) => {
+    setMessage(event.target.value);
+  };
+
+  const handleMessageSubmit = (event) => {
+    props.handleNewMessage(event, message);
+    setMessage('');
+  };
+
   return (
     <div>
-      <form onSubmit={props.handleNewMessage}>
-        <div className="row">
-          <div className="col-11 pr-0">
-            <input className="form-control" type="text" placeholder="Write a message..." />
-          </div>
-          <div className="col-1 d-flex justify-content-end">
-            <button className="btn btn-primary" type="submit">Send</button>
+      <form onSubmit={handleMessageSubmit}>
+        <div className="input-group mb-3">
+          <input type="text" className="form-control" onChange={handleMessageInput} placeholder="Write a message..." aria-label="Recipient's username" aria-describedby="button-addon2" value={message} />
+          <div className="input-group-append">
+            <button className="btn btn-primary" type="submit" id="button-addon2">Send</button>
           </div>
         </div>
       </form>
