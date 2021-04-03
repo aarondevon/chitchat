@@ -11,7 +11,7 @@ function ChatInput(props) {
   };
 
   const handleMessageSubmit = (event) => {
-    props.handleNewMessage(event, message);
+    props.saveNewMessage(event, message);
     setMessage('');
   };
 

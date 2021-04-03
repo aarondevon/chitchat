@@ -10,20 +10,22 @@ const dummyMessages = [
   { user: 'Abigail S', message: 'Yeah you are!' },
   { user: 'Aaron S', message: '-_-' },
   { user: 'Abigail S', message: 'Muahahahaha!' },
+  { user: 'John C', message: 'Yo!' },
+  { user: 'Aaron S', message: 'Hey!' },
 ];
 
 function ChatPage() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(dummyMessages);
 
-  const handleNewMessage = (event) => {
-    const newMessage = event.target.value;
-    setMessages([...messages, newMessage]);
+  const addNewMessageToState = (event, message) => {
+    event.preventDefault();
+
+    const newMessage = message;
+    setMessages([...messages, { user: 'Aaron S', message: newMessage }]);
   };
 
   useEffect(() => {
-    console.log('effect 1', messages);
-    setMessages(dummyMessages);
-    console.log('effect 2', messages);
+
   }, [messages]);
 
   return (
@@ -42,13 +44,12 @@ function ChatPage() {
           <UserList />
         </div>
         <div className="col-9">
-          {console.log('Messages from page:', messages)}
-          <ChatBox message={messages} />
+          <ChatBox messages={messages} />
         </div>
       </div>
 
       <div>
-        <ChatInput handleNewMessage={handleNewMessage} />
+        <ChatInput saveNewMessage={addNewMessageToState} />
       </div>
 
     </div>
