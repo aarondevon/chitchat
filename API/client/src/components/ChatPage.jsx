@@ -19,7 +19,7 @@ function ChatPage() {
   const [messages, setMessages] = useState([]);
 
   const getMessages = async () => {
-    const response = await axios.get('https://localhost:44367/api/messages');
+    const response = await axios.get('/api/messages');
     console.log(response.data);
     return response.data;
   };
