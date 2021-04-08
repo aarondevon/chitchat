@@ -1,21 +1,33 @@
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import UserList from './UserList';
 import ChatBox from './ChatBox';
 import ChatInput from './ChatInput';
 
-const dummyMessages = [
-  { user: 'Abigail S', message: 'It\'s your birthday month!' },
-  { user: 'Aaron S', message: 'I know! I am getting old!' },
-  { user: 'Abigail S', message: 'Yeah you are!' },
-  { user: 'Aaron S', message: '-_-' },
-  { user: 'Abigail S', message: 'Muahahahaha!' },
-  { user: 'John C', message: 'Yo!' },
-  { user: 'Aaron S', message: 'Hey!' },
-];
+// const dummyMessages = [
+//   { user: 'Abigail S', message: 'It\'s your birthday month!' },
+//   { user: 'Aaron S', message: 'I know! I am getting old!' },
+//   { user: 'Abigail S', message: 'Yeah you are!' },
+//   { user: 'Aaron S', message: '-_-' },
+//   { user: 'Abigail S', message: 'Muahahahaha!' },
+//   { user: 'John C', message: 'Yo!' },
+//   { user: 'Aaron S', message: 'Hey!' },
+// ];
 
 function ChatPage() {
-  const [messages, setMessages] = useState(dummyMessages);
+  const [messages, setMessages] = useState([]);
+
+  const getMessages = async () => {
+    const response = await axios.get('https://localhost:44367/api/messages');
+    console.log(response.data);
+    return response.data;
+  };
+
+  const setMessagesToState = async () => {
+    const responseMessages = await getMessages();
+    setMessages(responseMessages);
+  };
 
   const addNewMessageToState = (event, message) => {
     event.preventDefault();
@@ -23,6 +35,10 @@ function ChatPage() {
     const newMessage = message;
     setMessages([...messages, { user: 'Aaron S', message: newMessage }]);
   };
+
+  useEffect(() => {
+    setMessagesToState();
+  }, []);
 
   useEffect(() => {
 
