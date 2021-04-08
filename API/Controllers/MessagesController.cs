@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreLibrary.Data;
+using CoreLibrary.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +17,20 @@ namespace API.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
+        private IGetAllMessages _messages;
+
+        public MessagesController(IGetAllMessages messages)
+        {
+            _messages = messages;
+        }
+
+
         // GET: api/<MessagesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Produces("application/json")]
+        public IEnumerable<MessageModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _messages.getAllMessages();
         }
 
         // GET api/<MessagesController>/5
