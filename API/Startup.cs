@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreLibrary.Data;
+using CoreLibrary.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +32,8 @@ namespace API
         {
 
             services.AddControllers();
+            services.AddScoped<IGetAllMessages, GetDummyMessages>();
+
             services.AddSpaStaticFiles(config =>
             {
                 config.RootPath = "client/build";
