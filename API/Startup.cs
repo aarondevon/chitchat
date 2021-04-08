@@ -33,6 +33,7 @@ namespace API
 
             services.AddControllers();
             services.AddScoped<IGetAllMessages, GetDummyMessages>();
+            services.AddScoped<IGetAllUsers, GetDummyUsers>();
 
             services.AddSpaStaticFiles(config =>
             {
