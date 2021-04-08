@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreLibrary.Data;
+using CoreLibrary.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +14,39 @@ namespace API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private IGetAllUsers _users;
+
+        public UsersController(IGetAllUsers users)
+        {
+            _users = users;
+        }
+
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<UserModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _users.GetAllUsers();
         }
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            List<UserModel> users = _users.GetAllUsers();
+            string username = "";
+            foreach (UserModel user in users)
+            {
+                if (user.Id == id)
+                {
+                    username = user.Username;
+                    break;
+                }
+                else
+                {
+                    username= "No user found";
+                }
+            }
+            return username;
         }
 
         // POST api/<UserController>
