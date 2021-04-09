@@ -29,11 +29,19 @@ function ChatPage() {
     setMessages(responseMessages);
   };
 
-  const addNewMessageToState = (event, message) => {
+  const addNewMessageToState = async (event, message) => {
     event.preventDefault();
 
+    await axios({
+      method: 'post',
+      url: 'https://localhost:44367/api/messages',
+      data: {
+        username: 'Aaron S.',
+        message,
+      },
+    });
     const newMessage = message;
-    setMessages([...messages, { user: 'Aaron S', message: newMessage }]);
+    setMessages([...messages, { username: 'Aaron S', message: newMessage }]);
   };
 
   useEffect(() => {
