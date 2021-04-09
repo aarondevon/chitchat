@@ -26,5 +26,10 @@ namespace CoreLibrary.Data
         {
             return _messages;
         }
+
+        public void AddMessage(string username, string message)
+        {
+            _messages.Add(new MessageModel { Username = username, Message = message });
+        }
     }
 }
