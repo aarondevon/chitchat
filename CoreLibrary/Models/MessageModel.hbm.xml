@@ -1,0 +1,18 @@
+﻿<?xml version = "1.0" encoding = "utf-8" ?>
+
+<hibernate-mapping
+  xmlns = "urn:nhibernate-mapping-2.2"
+  assembly = "CoreLibrary" namespace = "CoreLibrary.Models">
+
+  <class name = "MessageModel" table="messages">
+    <id name = "Id" column="id" type="long">
+      <generator>
+        <param name="sequence">public.id</param>
+      </generator>
+    </id>
+
+    <property name = "Message" column="message" type="string"/>
+    <property name = "UsernameId" column="username_id" type="long"/>
+  </class>
+
+</hibernate-mapping>
