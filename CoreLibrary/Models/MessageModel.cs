@@ -8,8 +8,8 @@ namespace CoreLibrary.Models
 {
     public class MessageModel
     {
-        //public int Id { get; set; }
-        public string Message { get; set; }
-        public string Username { get; set; }
+        public virtual long Id { get; set; }
+        public virtual string Message { get; set; }
+        public virtual long UsernameId { get; set; }
     }
 }
