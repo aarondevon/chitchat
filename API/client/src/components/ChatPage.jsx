@@ -41,7 +41,7 @@ function ChatPage() {
       },
     });
     const newMessage = message;
-    setMessages([...messages, { username: 'Aaron S', message: newMessage }]);
+    setMessages([...messages, { username: 1, message: newMessage }]);
   };
 
   useEffect(() => {
