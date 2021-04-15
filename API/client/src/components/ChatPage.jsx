@@ -36,7 +36,7 @@ function ChatPage() {
       method: 'post',
       url: 'https://localhost:44367/api/messages',
       data: {
-        username: 'Aaron S.',
+        usernameId: 1,
         message,
       },
     });
