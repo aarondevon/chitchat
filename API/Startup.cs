@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NHibernate.NetCore;
 
 namespace API
 {
@@ -34,6 +35,16 @@ namespace API
             services.AddControllers();
             services.AddScoped<IGetAllMessages, GetDummyMessages>();
             services.AddScoped<IGetAllUsers, GetDummyUsers>();
+
+            // The path of the NHibernate configuration file
+            var path = System.IO.Path.Combine(
+             AppDomain.CurrentDomain.BaseDirectory,
+             "hibernate.cfg.xml"
+            );
+            // Adding NHibernate-related services
+            services.AddHibernate(path);
+            services.AddMvc()
+             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSpaStaticFiles(config =>
             {
