@@ -5,16 +5,6 @@ import UserList from './UserList';
 import ChatBox from './ChatBox';
 import ChatInput from './ChatInput';
 
-// const dummyMessages = [
-//   { user: 'Abigail S', message: 'It\'s your birthday month!' },
-//   { user: 'Aaron S', message: 'I know! I am getting old!' },
-//   { user: 'Abigail S', message: 'Yeah you are!' },
-//   { user: 'Aaron S', message: '-_-' },
-//   { user: 'Abigail S', message: 'Muahahahaha!' },
-//   { user: 'John C', message: 'Yo!' },
-//   { user: 'Aaron S', message: 'Hey!' },
-// ];
-
 function ChatPage() {
   const [messages, setMessages] = useState([]);
 
@@ -34,7 +24,7 @@ function ChatPage() {
 
     await axios({
       method: 'post',
-      url: 'https://localhost:44367/api/messages',
+      url: 'api/messages',
       data: {
         usernameId: 1,
         message,
