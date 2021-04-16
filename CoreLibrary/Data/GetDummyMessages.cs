@@ -15,13 +15,6 @@ namespace CoreLibrary.Data
         public GetDummyMessages(ISessionFactory factory)
         {
             _factory = factory;
-            //_messages.Add(new MessageModel { UsernameId = 2, Message = "It's your birthday month" });
-            //_messages.Add(new MessageModel { UsernameId = 1, Message = "I know! I am getting old!" });
-            //_messages.Add(new MessageModel { UsernameId = 2, Message = "Yeah you are!" });
-            //_messages.Add(new MessageModel { UsernameId = 1, Message = "-_-" });
-            //_messages.Add(new MessageModel { UsernameId = 2, Message = "Muahahahaha!" });
-            //_messages.Add(new MessageModel { UsernameId = 3, Message = "Yo!" });
-            //_messages.Add(new MessageModel { UsernameId = 1, Message = "Hey!" });
         }
 
         public List<MessageModel> getAllMessages()
@@ -31,7 +24,6 @@ namespace CoreLibrary.Data
                 var query = session.Query<MessageModel>();
                 return query.ToList();
             }
-            //return _messages;
         }
 
         public void AddMessage(long usernameId, string message)
@@ -50,7 +42,6 @@ namespace CoreLibrary.Data
                 }
                 
             }
-            //_messages.Add(new MessageModel { UsernameId = usernameId, Message = message });
         }
     }
 }
