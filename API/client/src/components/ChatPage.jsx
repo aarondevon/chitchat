@@ -7,6 +7,7 @@ import ChatInput from './ChatInput';
 
 function ChatPage() {
   const [messages, setMessages] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const getMessages = async () => {
     const response = await axios.get('/api/messages');
@@ -34,8 +35,20 @@ function ChatPage() {
     setMessages([...messages, { username: 1, message: newMessage }]);
   };
 
+  const getUsers = async () => {
+    const response = await axios.get('/api/users');
+    console.log(response.data);
+    return response.data;
+  };
+
+  const setUsersToState = async () => {
+    const responseUsers = await getUsers();
+    setUsers(responseUsers);
+  };
+
   useEffect(() => {
     setMessagesToState();
+    setUsersToState();
   }, []);
 
   useEffect(() => {
@@ -55,7 +68,7 @@ function ChatPage() {
 
       <div className="row">
         <div className="col-3">
-          <UserList />
+          <UserList users={users} />
         </div>
         <div className="col-9">
           <ChatBox messages={messages} />
