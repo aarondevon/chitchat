@@ -1,0 +1,15 @@
+﻿<?xml version = "1.0" encoding = "utf-8" ?>
+
+<hibernate-mapping
+  xmlns = "urn:nhibernate-mapping-2.2"
+  assembly = "CoreLibrary" namespace = "CoreLibrary.Models">
+
+  <class name = "UserModel" table="username">
+    <id name = "Id" column="id" type="long">
+      <generator class = "native"/>
+    </id>
+
+    <property name = "Username" column="username" type="string"/>
+  </class>
+
+</hibernate-mapping>
