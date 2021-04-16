@@ -8,7 +8,7 @@ namespace CoreLibrary.Models
 {
     public class UserModel
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
+        public virtual long Id { get; set; }
+        public virtual string Username { get; set; }
     }
 }
