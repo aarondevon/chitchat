@@ -6,9 +6,7 @@
 
   <class name = "MessageModel" table="messages">
     <id name = "Id" column="id" type="long">
-      <generator>
-        <param name="sequence">public.id</param>
-      </generator>
+      <generator class = "native"/>
     </id>
 
     <property name = "Message" column="message" type="string"/>
