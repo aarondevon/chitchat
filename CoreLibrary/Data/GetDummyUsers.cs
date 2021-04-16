@@ -1,4 +1,5 @@
 ﻿using CoreLibrary.Models;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +11,20 @@ namespace CoreLibrary.Data
     public class GetDummyUsers : IGetAllUsers
     {
         private readonly List<UserModel> _user = new List<UserModel>();
+        private ISessionFactory _factory;
 
-        public GetDummyUsers()
+        public GetDummyUsers(ISessionFactory factory)
         {
-            _user.Add(new UserModel { Id = 1, Username = "Aaron S." });
-            _user.Add(new UserModel { Id = 2, Username = "Abigail S." });
-            _user.Add(new UserModel { Id = 3, Username = "John C." });
+            _factory = factory;
         }
 
         public List<UserModel> GetAllUsers()
         {
-            return _user;
+            using (var session = _factory.OpenSession())
+            {
+                var query = session.Query<UserModel>();
+                return query.ToList();
+            }
         }
     }
 }
