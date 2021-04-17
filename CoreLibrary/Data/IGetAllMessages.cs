@@ -9,7 +9,7 @@ namespace CoreLibrary.Data
 {
     public interface IGetAllMessages
     {
-        List<MessageModel> getAllMessages();
+        List<MessageQueryModel> getAllMessages();
         void AddMessage(long usernameId, string message);
     }
 }
