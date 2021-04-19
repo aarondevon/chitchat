@@ -44,7 +44,7 @@ namespace API.Controllers
         [HttpPost]
         public void Post([FromBody] MessageModel message)
         {
-            _messages.AddMessage(message.UsernameId, message.Message);
+            _messages.AddMessage(message.User.Id, message.Message);
         }
 
         // PUT api/<MessagesController>/5

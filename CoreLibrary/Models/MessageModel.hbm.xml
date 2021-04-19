@@ -10,7 +10,8 @@
     </id>
 
     <property name = "Message" column="message" type="string"/>
-    <property name = "UsernameId" column="username_id" type="long"/>
+
+    <many-to-one name="User" column="id" />
   </class>
 
 </hibernate-mapping>

@@ -17,25 +17,20 @@ namespace CoreLibrary.Data
             _factory = factory;
         }
 
-        public List<MessageQueryModel> getAllMessages()
+        public List<MessageModel> getAllMessages()
         {
             using (var session = _factory.OpenSession())
             {
-                var query = session.CreateQuery(
-                    "select messages.id, messages.message, username.username " +
-                    "from messages " +
-                    "inner join username on messages.username_id = username.id " +
-                    "order by messages.id; "
-                    ).List();
+                var query = session.Query<MessageModel>();
 
-                return query.;
+                return query.ToList();
             }
         }
 
         public void AddMessage(long usernameId, string message)
         {
             MessageModel newMessage = new MessageModel();
-            newMessage.UsernameId = usernameId;
+            newMessage.User.Id = usernameId;
             newMessage.Message = message;
 
             using (var session = _factory.OpenSession())

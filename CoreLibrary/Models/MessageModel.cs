@@ -10,6 +10,6 @@ namespace CoreLibrary.Models
     {
         public virtual long Id { get; set; }
         public virtual string Message { get; set; }
-        public virtual long UsernameId { get; set; }
+        public virtual UserModel User { get; set; }
     }
 }
