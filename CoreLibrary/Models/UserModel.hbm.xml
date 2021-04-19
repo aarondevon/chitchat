@@ -4,8 +4,8 @@
   xmlns = "urn:nhibernate-mapping-2.2"
   assembly = "CoreLibrary" namespace = "CoreLibrary.Models">
 
-  <class name = "UserModel" table="username">
-    <id name = "Id" column="id" type="long">
+  <class name = "UserModel" table="users">
+    <id name = "Id" column="user_id" type="long">
       <generator class = "native"/>
     </id>
 

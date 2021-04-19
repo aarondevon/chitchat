@@ -5,13 +5,13 @@
   assembly = "CoreLibrary" namespace = "CoreLibrary.Models">
 
   <class name = "MessageModel" table="messages">
-    <id name = "Id" column="id" type="long">
+    <id name = "Id" column="message_id" type="long">
       <generator class = "native"/>
     </id>
 
     <property name = "Message" column="message" type="string"/>
 
-    <many-to-one name="User" column="id" />
+    <many-to-one name="User" column="user_id" />
   </class>
 
 </hibernate-mapping>
