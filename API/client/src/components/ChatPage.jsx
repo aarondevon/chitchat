@@ -11,7 +11,7 @@ function ChatPage() {
 
   const getMessages = async () => {
     const response = await axios.get('/api/messages');
-    console.log(response.data);
+    console.log('I tried to get messages');
     return response.data;
   };
 
