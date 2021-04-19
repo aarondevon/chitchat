@@ -10,7 +10,7 @@ function ChatBox(props) {
     return props.messages.map((message) => {
       return (
         <Message
-          usernameId={message.usernameId}
+          usernameId={message.user.username}
           message={message.message}
         />
       );
