@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CoreLibrary.Data
 {
-    public class GetDummyMessages : IGetAllMessages
+    public class GetMessages : IGetAllMessages
     {
         private readonly List<MessageModel> _messages = new List<MessageModel>();
         private ISessionFactory _factory;
-        public GetDummyMessages(ISessionFactory factory)
+        public GetMessages(ISessionFactory factory)
         {
             _factory = factory;
         }

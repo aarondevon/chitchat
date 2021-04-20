@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CoreLibrary.Data
 {
-    public class GetDummyUsers : IGetAllUsers
+    public class GetUsers : IGetAllUsers
     {
         private readonly List<UserModel> _user = new List<UserModel>();
         private ISessionFactory _factory;
 
-        public GetDummyUsers(ISessionFactory factory)
+        public GetUsers(ISessionFactory factory)
         {
             _factory = factory;
         }

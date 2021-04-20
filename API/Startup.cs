@@ -33,8 +33,8 @@ namespace API
         {
 
             services.AddControllers();
-            services.AddScoped<IGetAllMessages, GetDummyMessages>();
-            services.AddScoped<IGetAllUsers, GetDummyUsers>();
+            services.AddScoped<IGetAllMessages, GetMessages>();
+            services.AddScoped<IGetAllUsers, GetUsers>();
 
             // The path of the NHibernate configuration file
             var path = System.IO.Path.Combine(
