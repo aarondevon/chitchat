@@ -19,12 +19,11 @@ namespace CoreLibrary.Data
 
         public List<MessageModel> getAllMessages()
         {
-            using (var session = _factory.OpenSession())
-            {
-                var query = session.Query<MessageModel>();
+            var session = _factory.OpenSession();
 
-                return query.ToList();
-            }
+            var query = session.Query<MessageModel>();
+
+            return query.ToList();
         }
 
         public void AddMessage(long usernameId, string message)
