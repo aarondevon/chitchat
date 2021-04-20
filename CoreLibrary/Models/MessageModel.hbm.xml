@@ -11,7 +11,7 @@
 
     <property name = "Message" column="message" type="string"/>
 
-    <many-to-one name="User" column="user_id" />
+    <many-to-one name="User" column="username_id" />
   </class>
 
 </hibernate-mapping>
