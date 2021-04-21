@@ -31,18 +31,25 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddScoped<IGetAllMessages, GetMessages>();
             services.AddScoped<IGetAllUsers, GetUsers>();
 
+            var cfg = new NHibernate.Cfg.Configuration().Configure();
+            var server = Environment.GetEnvironmentVariable("SERVER");
+            var database = Environment.GetEnvironmentVariable("DATABASE");
+            var userId = Environment.GetEnvironmentVariable("USER_ID");
+            var password = Environment.GetEnvironmentVariable("PASSWORD");
+            cfg.SetProperty(NHibernate.Cfg.Environment.ConnectionString, $"server={server};database={database};user id={userId};password={password};");
+
             // The path of the NHibernate configuration file
-            var path = System.IO.Path.Combine(
-             AppDomain.CurrentDomain.BaseDirectory,
-             "hibernate.cfg.xml"
-            );
+            //var path = System.IO.Path.Combine(
+            // AppDomain.CurrentDomain.BaseDirectory,
+            // "hibernate.cfg.xml"
+            //);
             // Adding NHibernate-related services
-            services.AddHibernate(path);
+
+            services.AddHibernate(cfg);
             services.AddMvc()
              .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
