@@ -47,8 +47,8 @@ namespace API
             // AppDomain.CurrentDomain.BaseDirectory,
             // "hibernate.cfg.xml"
             //);
-            // Adding NHibernate-related services
 
+            // Adding NHibernate-related services
             services.AddHibernate(cfg);
             services.AddMvc()
              .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
