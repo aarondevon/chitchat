@@ -1,5 +1,9 @@
 ﻿using CoreLibrary.Data;
 using CoreLibrary.Models;
+using JWT;
+using JWT.Algorithms;
+using JWT.Exceptions;
+using JWT.Serializers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +34,31 @@ namespace API.Controllers
         [Produces("application/json")]
         public IEnumerable<MessageModel> Get()
         {
-            return _messages.getAllMessages();
+            const string secret = "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk";
+            Request.Headers.TryGetValue("Authorization", out var token);
+
+            try
+            {
+                IJsonSerializer serializer = new JsonNetSerializer();
+                var provider = new UtcDateTimeProvider();
+                IJwtValidator validator = new JwtValidator(serializer, provider);
+                IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
+                IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // symmetric
+                IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
+
+                var json = decoder.Decode(token, secret, verify: true);
+                return _messages.getAllMessages();
+                Console.WriteLine(json);
+            }
+            catch (TokenExpiredException)
+            {
+                Console.WriteLine("Token has expired");
+            }
+            catch (SignatureVerificationException)
+            {
+                Console.WriteLine("Token has invalid signature");
+            }
+            return null;
         }
 
         // GET api/<MessagesController>/5

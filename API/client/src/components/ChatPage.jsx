@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import AuthService from '../services/auth.service';
+import AuthHeader from '../services/auth-header';
 import UserList from './UserList';
 import ChatBox from './ChatBox';
 import ChatInput from './ChatInput';
@@ -15,7 +16,7 @@ function ChatPage() {
   const currentUser = AuthService.getCurrentUser();
 
   const getMessages = async () => {
-    const response = await axios.get('/api/messages');
+    const response = await axios.get('/api/messages', { headers: AuthHeader() });
     console.log('I tried to get messages');
     return response.data;
   };

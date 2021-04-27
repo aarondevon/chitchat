@@ -1,10 +1,10 @@
 /* eslint-disable no-else-return */
 /* eslint-disable no-undef */
 export default function authHeader() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const token = localStorage.getItem('token');
 
-  if (user && user.accessToken) {
-    return { Authorization: $`Bearer {user.accessToken}` };
+  if (token) {
+    return { Authorization: token };
   } else {
     return {};
   }
