@@ -10,6 +10,6 @@ namespace CoreLibrary.Data
     public interface IGetAllMessages
     {
         List<MessageModel> getAllMessages();
-        void AddMessage(long usernameId, string message);
+        void AddMessage(long userId, string message);
     }
 }

@@ -28,8 +28,8 @@ namespace CoreLibrary.Data
 
         public void AddMessage(long usernameId, string message)
         {
-            MessageModel newMessage = new MessageModel();
-            newMessage.User.Id = usernameId;
+            MessageQueryModel newMessage = new MessageQueryModel();
+            newMessage.UserId = usernameId;
             newMessage.Message = message;
 
             using (var session = _factory.OpenSession())
