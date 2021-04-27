@@ -1,26 +1,27 @@
 /* eslint-disable no-undef */
 /* eslint-disable arrow-body-style */
 import axios from 'axios';
+import jwt from 'jwt-decode';
 
-const API_URL = 'https://localhost:44367/api/auth/';
+const API_URL = 'https://localhost:44367/api/';
 
-const register = (username, email, password) => {
-  return axios.post(`${API_URL}signup`, {
+const register = (username, password) => {
+  return axios.post(`${API_URL}users`, {
     username,
-    email,
     password,
   });
 };
 
 const login = (username, password) => {
   return axios
-    .post(`${API_URL}signin`, {
+    .post(`${API_URL}login`, {
       username,
       password,
     })
     .then((response) => {
       if (response.data.accessToken) {
-        localStorage.setItem('user', JSON.stringify(response.data));
+        const token = response.data.accessToken;
+        localStorage.setItem('token', token);
       }
 
       return response.data;
@@ -28,11 +29,11 @@ const login = (username, password) => {
 };
 
 const logout = () => {
-  localStorage.removeItem('user');
+  localStorage.removeItem('token');
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem('user'));
+  return jwt(localStorage.getItem('token'));
 };
 
 export default {
