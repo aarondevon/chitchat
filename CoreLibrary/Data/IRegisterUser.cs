@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CoreLibrary.Data
 {
-    interface IRegisterUser
+    public interface IRegisterUser
     {
-        void RegisterUser();
+        void RegisterUser(string username, string password);
     }
 }

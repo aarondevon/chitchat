@@ -8,8 +8,8 @@ namespace CoreLibrary.Models
 {
     public class RegisterUserModel
     {
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public virtual long Id { get; set; }
+        public virtual string Username { get; set; }
+        public virtual string Password { get; set; }
     }
 }
