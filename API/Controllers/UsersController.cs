@@ -15,10 +15,12 @@ namespace API.Controllers
     public class UsersController : ControllerBase
     {
         private IGetAllUsers _users;
+        private IRegisterUser _registerUser;
 
-        public UsersController(IGetAllUsers users)
+        public UsersController(IGetAllUsers users, IRegisterUser registerUser)
         {
             _users = users;
+            _registerUser = registerUser;
         }
 
         // GET: api/<UserController>
@@ -51,8 +53,9 @@ namespace API.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] RegisterUserModel user)
         {
+            _registerUser.RegisterUser(user.Username, user.Password);
         }
 
         // PUT api/<UserController>/5
