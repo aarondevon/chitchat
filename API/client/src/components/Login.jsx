@@ -52,8 +52,8 @@ const Login = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(username, password).then(
         () => {
-          props.history.push('/chatpage');
-          window.location.reload();
+          props.history.push('chatPage');
+          // window.location.reload();
         },
         (error) => {
           const resMessage = (error.response
