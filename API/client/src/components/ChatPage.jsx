@@ -1,13 +1,18 @@
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import AuthService from '../services/auth.service';
 import UserList from './UserList';
 import ChatBox from './ChatBox';
 import ChatInput from './ChatInput';
 
 function ChatPage() {
+  const history = useHistory();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
+
+  const currentUser = AuthService.getCurrentUser();
 
   const getMessages = async () => {
     const response = await axios.get('/api/messages');
@@ -27,12 +32,12 @@ function ChatPage() {
       method: 'post',
       url: 'api/messages',
       data: {
-        usernameId: 1,
+        userId: currentUser.userId,
         message,
       },
     });
     const newMessage = message;
-    setMessages([...messages, { username: 1, message: newMessage }]);
+    setMessages([...messages, { message: newMessage, user: { username: currentUser.Username } }]);
   };
 
   const getUsers = async () => {
@@ -44,6 +49,11 @@ function ChatPage() {
   const setUsersToState = async () => {
     const responseUsers = await getUsers();
     setUsers(responseUsers);
+  };
+
+  const handleLogout = () => {
+    AuthService.logout();
+    history.push('/');
   };
 
   useEffect(() => {
@@ -62,7 +72,8 @@ function ChatPage() {
           <h1 className="display-3">ChitChat</h1>
         </div>
         <div className="col-6 d-flex justify-content-end align-items-center">
-          <button id="log-out" className="btn btn-primary">Log Out</button>
+          <h3>{currentUser.username}</h3>
+          <button id="log-out" className="btn btn-primary" onClick={handleLogout}>Log Out</button>
         </div>
       </div>
 
