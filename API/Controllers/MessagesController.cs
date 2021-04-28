@@ -1,4 +1,5 @@
-﻿using CoreLibrary.Data;
+﻿using API.Hubs;
+using CoreLibrary.Data;
 using CoreLibrary.Models;
 using JWT;
 using JWT.Algorithms;
@@ -6,6 +7,7 @@ using JWT.Exceptions;
 using JWT.Serializers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -22,10 +24,12 @@ namespace API.Controllers
     public class MessagesController : ControllerBase
     {
         private IGetAllMessages _messages;
+        private readonly IHubContext<MessageHub> _messageHub;
 
-        public MessagesController(IGetAllMessages messages)
+        public MessagesController(IGetAllMessages messages, IHubContext<MessageHub> messageHub)
         {
             _messages = messages;
+            _messageHub = messageHub;
         }
 
 
@@ -70,9 +74,34 @@ namespace API.Controllers
 
         // POST api/<MessagesController>
         [HttpPost]
-        public void Post([FromBody] MessageQueryModel message)
+        public async Task<IActionResult> Post([FromBody] MessageQueryModel message)
         {
-            _messages.AddMessage(message.UserId, message.Message);
+            const string secret = "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk";
+            Request.Headers.TryGetValue("Authorization", out var token);
+
+            try
+            {
+                IJsonSerializer serializer = new JsonNetSerializer();
+                var provider = new UtcDateTimeProvider();
+                IJwtValidator validator = new JwtValidator(serializer, provider);
+                IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
+                IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // symmetric
+                IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
+
+                var json = decoder.Decode(token, secret, verify: true);
+                await _messageHub.Clients.All.SendAsync("senToReact", message);
+                _messages.AddMessage(message.UserId, message.Message);
+                return Ok();
+            }
+            catch (TokenExpiredException)
+            {
+                Console.WriteLine("Token has expired");
+            }
+            catch (SignatureVerificationException)
+            {
+                Console.WriteLine("Token has invalid signature");
+            }
+            return null;
         }
 
         // PUT api/<MessagesController>/5
