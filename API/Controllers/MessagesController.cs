@@ -74,7 +74,7 @@ namespace API.Controllers
 
         // POST api/<MessagesController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] MessageQueryModel message)
+        public async Task<IActionResult> Post([FromBody] MessageModel message)
         {
             const string secret = "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk";
             Request.Headers.TryGetValue("Authorization", out var token);
@@ -89,8 +89,8 @@ namespace API.Controllers
                 IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
 
                 var json = decoder.Decode(token, secret, verify: true);
-                await _messageHub.Clients.All.SendAsync("senToReact", message);
-                _messages.AddMessage(message.UserId, message.Message);
+                await _messageHub.Clients.All.SendAsync("sendToReact", message);
+                _messages.AddMessage(message.User.Id, message.Message);
                 return Ok();
             }
             catch (TokenExpiredException)
