@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreLibrary.Models
 {
-    public class RegisterUserModel
+    public class RegisterLoginUserModel
     {
         public virtual long Id { get; set; }
         public virtual string Username { get; set; }
