@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreLibrary.Models
 {
-    public class MessageQueryModel
+    public class SaveMessageModel
     {
         public virtual long Id { get; set; }
         public virtual string Message { get; set; }

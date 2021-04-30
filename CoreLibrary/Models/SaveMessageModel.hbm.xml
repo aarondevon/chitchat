@@ -4,7 +4,7 @@
   xmlns = "urn:nhibernate-mapping-2.2"
   assembly = "CoreLibrary" namespace = "CoreLibrary.Models">
 
-  <class name = "MessageQueryModel" table="messages">
+  <class name = "SaveMessageModel" table="messages">
     <id name = "Id" column="message_id" type="long">
       <generator class = "native"/>
     </id>
