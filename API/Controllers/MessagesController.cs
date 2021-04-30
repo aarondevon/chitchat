@@ -17,10 +17,10 @@ namespace API.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
-        private IGetAllMessages _messages;
+        private IMessageService _messages;
         private readonly IHubContext<MessageHub> _messageHub;
 
-        public MessagesController(IGetAllMessages messages, IHubContext<MessageHub> messageHub)
+        public MessagesController(IMessageService messages, IHubContext<MessageHub> messageHub)
         {
             _messages = messages;
             _messageHub = messageHub;

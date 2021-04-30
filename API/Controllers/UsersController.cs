@@ -14,10 +14,10 @@ namespace API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private IGetAllUsers _users;
-        private IRegisterUser _registerUser;
+        private IUserService _users;
+        private IRegisterUserService _registerUser;
 
-        public UsersController(IGetAllUsers users, IRegisterUser registerUser)
+        public UsersController(IUserService users, IRegisterUserService registerUser)
         {
             _users = users;
             _registerUser = registerUser;
