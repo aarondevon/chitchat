@@ -17,7 +17,7 @@ namespace CoreLibrary.Services
         }
         void IRegisterUser.RegisterUser(string username, string password)
         {
-            RegisterUserModel newUser = new RegisterUserModel();
+            RegisterLoginUserModel newUser = new RegisterLoginUserModel();
             newUser.Username = username;
             newUser.Password = password;
 

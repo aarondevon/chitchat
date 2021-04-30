@@ -53,7 +53,7 @@ namespace API.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] RegisterUserModel user)
+        public void Post([FromBody] RegisterLoginUserModel user)
         {
             _registerUser.RegisterUser(user.Username, user.Password);
         }

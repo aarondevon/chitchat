@@ -25,12 +25,12 @@ namespace API.Controllers
         }
         // POST api/<LoginController>
         [HttpPost]
-        public TokenModel Post([FromBody] RegisterUserModel user)
+        public TokenModel Post([FromBody] RegisterLoginUserModel user)
         {
-            IList<RegisterUserModel> users;
+            IList<RegisterLoginUserModel> users;
             using (var session = _factory.OpenSession())
             {
-                users = session.QueryOver<RegisterUserModel>()
+                users = session.QueryOver<RegisterLoginUserModel>()
                 .Where(u => u.Username == user.Username.Trim())
                 .And(u => u.Password == user.Password.Trim())
                 .List();

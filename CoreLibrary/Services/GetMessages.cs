@@ -28,7 +28,7 @@ namespace CoreLibrary.Services
 
         public void AddMessage(long usernameId, string message)
         {
-            MessageQueryModel newMessage = new MessageQueryModel();
+            SaveMessageModel newMessage = new SaveMessageModel();
             newMessage.UserId = usernameId;
             newMessage.Message = message;
 
