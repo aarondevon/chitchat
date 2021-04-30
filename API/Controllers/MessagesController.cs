@@ -1,21 +1,15 @@
 ﻿using API.Hubs;
-using CoreLibrary.Data;
+using CoreLibrary.Services;
 using CoreLibrary.Models;
 using JWT;
 using JWT.Algorithms;
 using JWT.Exceptions;
 using JWT.Serializers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace API.Controllers
 {
@@ -31,7 +25,6 @@ namespace API.Controllers
             _messages = messages;
             _messageHub = messageHub;
         }
-
 
         // GET: api/<MessagesController>
         [HttpGet]
@@ -65,13 +58,6 @@ namespace API.Controllers
             return null;
         }
 
-        // GET api/<MessagesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<MessagesController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] MessageModel message)
@@ -102,18 +88,6 @@ namespace API.Controllers
                 Console.WriteLine("Token has invalid signature");
             }
             return null;
-        }
-
-        // PUT api/<MessagesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<MessagesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

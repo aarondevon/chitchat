@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreLibrary.Data
+namespace CoreLibrary.Services
 {
     public interface IGetAllMessages
     {
