@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CoreLibrary.Services
 {
-    public class GetMessages : IGetAllMessages
+    public class MessageService : IMessageService
     {
         private readonly List<MessageModel> _messages = new List<MessageModel>();
         private ISessionFactory _factory;
-        public GetMessages(ISessionFactory factory)
+        public MessageService(ISessionFactory factory)
         {
             _factory = factory;
         }

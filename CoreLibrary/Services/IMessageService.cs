@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoreLibrary.Services
 {
-    public interface IGetAllMessages
+    public interface IMessageService
     {
         List<MessageModel> getAllMessages();
         void AddMessage(long userId, string message);

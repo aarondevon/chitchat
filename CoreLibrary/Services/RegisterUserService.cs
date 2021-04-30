@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace CoreLibrary.Services
 {
-    public class RegisterUser : IRegisterUser
+    public class RegisterUserService : IRegisterUserService
     {
         private ISessionFactory _factory;
-        public RegisterUser(ISessionFactory factory)
+        public RegisterUserService(ISessionFactory factory)
         {
             _factory = factory;
         }
-        void IRegisterUser.RegisterUser(string username, string password)
+        void IRegisterUserService.RegisterUser(string username, string password)
         {
             RegisterLoginUserModel newUser = new RegisterLoginUserModel();
             newUser.Username = username;
