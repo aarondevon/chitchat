@@ -42,7 +42,8 @@ namespace API.Controllers
                     { "userId", users[0].Id },
                     { "Username", users[0].Username }
                 };
-                const string secret = "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk";
+                
+                string secret = Environment.GetEnvironmentVariable("SECRET");
 
                 IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // symmetric
                 IJsonSerializer serializer = new JsonNetSerializer();
