@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CoreLibrary.Data;
+using API.Hubs;
+using CoreLibrary.Services;
 using CoreLibrary.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,8 +33,10 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IGetAllMessages, GetMessages>();
-            services.AddScoped<IGetAllUsers, GetUsers>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRegisterUserService, RegisterUserService>();
+            services.AddSignalR();
 
             var cfg = new NHibernate.Cfg.Configuration().Configure();
             var server = Environment.GetEnvironmentVariable("SERVER");
@@ -78,6 +81,7 @@ namespace API
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<MessageHub>("/message");
                 endpoints.MapControllers();
             });
 
