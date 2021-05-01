@@ -31,7 +31,7 @@ namespace API.Controllers
         [Produces("application/json")]
         public IEnumerable<MessageModel> Get()
         {
-            const string secret = "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk";
+            string secret = Environment.GetEnvironmentVariable("SECRET");
             Request.Headers.TryGetValue("Authorization", out var token);
 
             try
