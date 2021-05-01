@@ -19,6 +19,7 @@ namespace API.Controllers
     {
         private IMessageService _messages;
         private readonly IHubContext<MessageHub> _messageHub;
+        private readonly string secret = Environment.GetEnvironmentVariable("SECRET");
 
         public MessagesController(IMessageService messages, IHubContext<MessageHub> messageHub)
         {
@@ -31,7 +32,7 @@ namespace API.Controllers
         [Produces("application/json")]
         public IEnumerable<MessageModel> Get()
         {
-            string secret = Environment.GetEnvironmentVariable("SECRET");
+            //string secret = Environment.GetEnvironmentVariable("SECRET");
             Request.Headers.TryGetValue("Authorization", out var token);
 
             try
@@ -62,7 +63,6 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] MessageModel message)
         {
-            const string secret = "GQDstcKsx0NHjPOuXOYg5MbeJ1XT0uFiwDVvVBrk";
             Request.Headers.TryGetValue("Authorization", out var token);
 
             try
