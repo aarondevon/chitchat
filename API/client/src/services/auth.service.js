@@ -3,7 +3,7 @@
 import axios from 'axios';
 import jwt from 'jwt-decode';
 
-const API_URL = 'https://localhost:44367/api/';
+const API_URL = '/api/';
 
 const register = (username, password) => {
   return axios.post(`${API_URL}users`, {
