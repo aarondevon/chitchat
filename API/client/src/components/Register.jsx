@@ -5,7 +5,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 import React, { useState, useRef } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
@@ -108,14 +108,17 @@ const Register = (props) => {
   };
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
-
+    <div className="register-container container">
+      <div id="chat-page-header" className="row">
+        <div className="col-6">
+          <h1 className="display-3">ChitChat</h1>
+        </div>
+        <div className="col-6 d-flex justify-content-end align-items-center">
+          <small className="pr-2"> Already have an account?</small>
+          <Link to="/" className="">Sign In</Link>
+        </div>
+      </div>
+      <div className="register-login-container mx-auto">
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
             <div>
@@ -174,6 +177,7 @@ const Register = (props) => {
           <CheckButton style={{ display: 'none' }} ref={checkBtn} />
         </Form>
       </div>
+
     </div>
   );
 };
