@@ -40,9 +40,9 @@ namespace API.Controllers
                 var payload = new Dictionary<string, object>
                 {
                     { "userId", users[0].Id },
-                    { "Username", users[0].Username }
+                    { "username", users[0].Username }
                 };
-                
+
                 string secret = Environment.GetEnvironmentVariable("SECRET");
 
                 IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // symmetric
