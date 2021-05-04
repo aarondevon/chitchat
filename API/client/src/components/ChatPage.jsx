@@ -32,7 +32,7 @@ function ChatPage() {
   const sendMessage = async (event, message) => {
     event.preventDefault();
     const chatMessage = {
-      username: currentUser.Username,
+      username: currentUser.username,
       message,
     };
 
@@ -45,7 +45,7 @@ function ChatPage() {
           message,
           user: {
             id: currentUser.userId,
-            userName: currentUser.Username,
+            userName: currentUser.username,
           },
         },
       });
@@ -114,7 +114,7 @@ function ChatPage() {
           <h1 className="display-3">ChitChat</h1>
         </div>
         <div className="col-6 d-flex justify-content-end align-items-center">
-          <h3>{currentUser.username}</h3>
+          <h5 className="pr-2">{currentUser.username}</h5>
           <button id="log-out" className="btn btn-primary" onClick={handleLogout}>Log Out</button>
         </div>
       </div>
