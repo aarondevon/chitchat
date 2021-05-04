@@ -1,10 +1,14 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 /* eslint-disable arrow-body-style */
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Message from './Message';
 
 function ChatBox(props) {
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
   const displayMessages = () => {
     console.log(props.messages);
     return props.messages.map((message) => {
@@ -16,12 +20,16 @@ function ChatBox(props) {
       );
     });
   };
+
+  useEffect(scrollToBottom, [props.messages]);
+
   return (
     <div>
       <h3>Chat Box</h3>
       <div id="messages-container" className="">
         <ul id="messages" className="list-group border">
           {displayMessages()}
+          <li ref={messagesEndRef} />
         </ul>
       </div>
     </div>
