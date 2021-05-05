@@ -6,7 +6,7 @@ import jwt from 'jwt-decode';
 const API_URL = '/api/';
 
 const register = (username, password) => {
-  return axios.post(`${API_URL}users`, {
+  return axios.post(`${API_URL}register`, {
     username,
     password,
   });
