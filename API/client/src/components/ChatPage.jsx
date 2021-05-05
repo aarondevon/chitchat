@@ -5,7 +5,7 @@ import axios from 'axios';
 import * as signalR from '@microsoft/signalr';
 import { useHistory } from 'react-router-dom';
 import AuthService from '../services/auth.service';
-import AuthHeader from '../services/auth-header';
+import authHeader from '../services/auth-header';
 import UserList from './UserList';
 import ChatBox from './ChatBox';
 import ChatInput from './ChatInput';
@@ -19,8 +19,8 @@ function ChatPage() {
   const currentUser = AuthService.getCurrentUser();
 
   const getMessages = async () => {
-    const response = await axios.get('/api/messages', { headers: AuthHeader() });
-    console.log('I tried to get messages');
+    const response = await axios.get('/api/messages', { headers: authHeader() });
+
     return response.data;
   };
 
@@ -39,7 +39,7 @@ function ChatPage() {
     try {
       await axios({
         method: 'post',
-        headers: AuthHeader(),
+        headers: authHeader(),
         url: 'api/messages',
         data: {
           message,
@@ -59,7 +59,7 @@ function ChatPage() {
   };
 
   const getUsers = async () => {
-    const response = await axios.get('/api/users', { headers: AuthHeader() });
+    const response = await axios.get('/api/users', { headers: authHeader() });
     console.log(response.data);
     return response.data;
   };
