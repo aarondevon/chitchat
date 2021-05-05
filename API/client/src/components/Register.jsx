@@ -91,7 +91,8 @@ const Register = (props) => {
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
-          return <Redirect to="/login" />;
+          // eslint-disable-next-line react/prop-types
+          props.history.push('homePage');
         },
         (error) => {
           const resMessage = (error.response
