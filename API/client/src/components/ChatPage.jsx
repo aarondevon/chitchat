@@ -59,7 +59,7 @@ function ChatPage() {
   };
 
   const getUsers = async () => {
-    const response = await axios.get('/api/users');
+    const response = await axios.get('/api/users', { headers: AuthHeader() });
     console.log(response.data);
     return response.data;
   };
