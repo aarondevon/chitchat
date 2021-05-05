@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState, useRef } from 'react';
@@ -64,7 +65,7 @@ function ChatPage() {
     <div id="chat-page-container" className="container">
       <div id="chat-page-header" className="row">
         <div className="col-6">
-          <h1 className="display-3">ChitChat</h1>
+          <h1 id="hero-title" className="display-3">ChitChat</h1>
         </div>
         <div className="col-6 d-flex justify-content-end align-items-center">
           <h5 className="pr-2">{currentUser.username}</h5>

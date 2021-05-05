@@ -112,7 +112,7 @@ const Register = (props) => {
     <div className="register-container container">
       <div id="chat-page-header" className="row">
         <div className="col-6">
-          <h1 className="display-3">ChitChat</h1>
+          <h1 id="hero-title" className="display-3">ChitChat</h1>
         </div>
         <div className="col-6 d-flex justify-content-end align-items-center">
           <small className="pr-2"> Already have an account?</small>
@@ -120,6 +120,7 @@ const Register = (props) => {
         </div>
       </div>
       <div className="register-login-container mx-auto">
+        <h2 className="display-4">Sign Up</h2>
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
             <div>
