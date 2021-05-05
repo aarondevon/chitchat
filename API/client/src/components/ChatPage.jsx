@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
 import * as signalR from '@microsoft/signalr';
 import { useHistory } from 'react-router-dom';
 import AuthService from '../services/auth.service';
-import authHeader from '../services/auth-header';
+import MessageService from '../services/message.service';
+import UserService from '../services/user.service';
 import UserList from './UserList';
 import ChatBox from './ChatBox';
 import ChatInput from './ChatInput';
@@ -18,54 +18,13 @@ function ChatPage() {
 
   const currentUser = AuthService.getCurrentUser();
 
-  const getMessages = async () => {
-    const response = await axios.get('/api/messages', { headers: authHeader() });
-
-    return response.data;
-  };
-
   const setMessagesToState = async () => {
-    const responseMessages = await getMessages();
+    const responseMessages = await MessageService.getMessages();
     setMessages(responseMessages);
   };
 
-  const sendMessage = async (event, message) => {
-    event.preventDefault();
-    const chatMessage = {
-      username: currentUser.username,
-      message,
-    };
-
-    try {
-      await axios({
-        method: 'post',
-        headers: authHeader(),
-        url: 'api/messages',
-        data: {
-          message,
-          user: {
-            id: currentUser.userId,
-            userName: currentUser.username,
-          },
-        },
-      });
-    } catch (e) {
-      console.log(e);
-    }
-
-    // const newMessage = message;
-    // eslint-disable-next-line max-len
-    // setMessages([...messages, { message: newMessage, user: { username: currentUser.Username } }]);
-  };
-
-  const getUsers = async () => {
-    const response = await axios.get('/api/users', { headers: authHeader() });
-    console.log(response.data);
-    return response.data;
-  };
-
   const setUsersToState = async () => {
-    const responseUsers = await getUsers();
+    const responseUsers = await UserService.getUsers();
     setUsers(responseUsers);
   };
 
@@ -80,10 +39,6 @@ function ChatPage() {
     setUsersToState();
   }, []);
 
-  // useEffect(() => {
-
-  // }, [messages]);
-
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
       .withUrl('/message')
@@ -92,8 +47,6 @@ function ChatPage() {
 
     connection.start()
       .then((result) => {
-        console.log('Connected!');
-
         connection.on('sendToReact', (message) => {
           const newMessage = message;
           // eslint-disable-next-line max-len
@@ -129,7 +82,10 @@ function ChatPage() {
       </div>
 
       <div>
-        <ChatInput saveNewMessage={sendMessage} />
+        <ChatInput
+          saveNewMessage={MessageService.sendMessage}
+          currentUser={currentUser}
+        />
       </div>
 
     </div>
