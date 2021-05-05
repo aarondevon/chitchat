@@ -14,7 +14,7 @@ using JWT.Exceptions;
 
 namespace API.Controllers
 {
-    //[Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -30,7 +30,6 @@ namespace API.Controllers
         }
 
         // GET: api/<UserController>
-        [Route("api/users")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -60,7 +59,6 @@ namespace API.Controllers
         }
 
         // GET api/<UserController>/5
-        [Route("api/users")]
         [HttpGet("{id}")]
         public string Get(int id)
         {
@@ -82,7 +80,6 @@ namespace API.Controllers
         }
 
         // POST api/<UserController>
-        [Route("api/register")]
         [HttpPost]
         public void Post([FromBody] RegisterLoginUserModel user)
         {
