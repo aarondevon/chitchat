@@ -81,9 +81,19 @@ namespace API.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] RegisterLoginUserModel user)
+        public IActionResult Post([FromBody] RegisterLoginUserModel user)
         {
-            _registerUser.RegisterUser(user.Username, user.Password);
+            UserModel result = _registerUser.RegisterUser(user.Username, user.Password);
+
+            if (result != null)
+            {
+                return StatusCode(201, result);
+            }
+            else
+            {
+                return StatusCode(401, "Username already exists");
+            }
+
         }
 
         // PUT api/<UserController>/5
