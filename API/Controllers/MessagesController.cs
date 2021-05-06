@@ -19,7 +19,8 @@ namespace API.Controllers
     {
         private IMessageService _messages;
         private readonly IHubContext<MessageHub> _messageHub;
-        private readonly string secret = Environment.GetEnvironmentVariable("SECRET");
+        //private readonly string secret = Environment.GetEnvironmentVariable("SECRET");
+        string secret = "9z3j%mCFt3XZEi2UGJ3KBTaxgx&ZQEjQNJz4Su95x%ucaWuv#L%DFCoZAz6@";
 
         public MessagesController(IMessageService messages, IHubContext<MessageHub> messageHub)
         {
@@ -30,7 +31,7 @@ namespace API.Controllers
         // GET: api/<MessagesController>
         [HttpGet]
         [Produces("application/json")]
-        public IEnumerable<MessageModel> Get()
+        public IActionResult Get()
         {
             //string secret = Environment.GetEnvironmentVariable("SECRET");
             Request.Headers.TryGetValue("Authorization", out var token);
@@ -45,18 +46,17 @@ namespace API.Controllers
                 IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
 
                 var json = decoder.Decode(token, secret, verify: true);
-                return _messages.getAllMessages();
-                Console.WriteLine(json);
+                return Ok(_messages.getAllMessages());
             }
             catch (TokenExpiredException)
             {
-                Console.WriteLine("Token has expired");
+                return StatusCode(401, "Token has expired");
             }
             catch (SignatureVerificationException)
             {
-                Console.WriteLine("Token has invalid signature");
+                return StatusCode(401, "Token has invalid signature");
             }
-            return null;
+            return StatusCode(500, "Server error");
         }
 
         // POST api/<MessagesController>
