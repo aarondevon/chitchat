@@ -65,7 +65,7 @@ const Register = (props) => {
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
-    setUsername(username);
+    setUsername(username.trim());
   };
 
   // const onChangeEmail = (e) => {
