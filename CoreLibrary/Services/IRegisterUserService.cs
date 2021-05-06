@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace CoreLibrary.Services
 {
     public interface IRegisterUserService
     {
-        void RegisterUser(string username, string password);
+        UserModel RegisterUser(string username, string password);
     }
 }

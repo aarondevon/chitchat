@@ -10,7 +10,8 @@ namespace CoreLibrary.Services
         {
             _factory = factory;
         }
-        void IRegisterUserService.RegisterUser(string username, string password)
+
+        UserModel IRegisterUserService.RegisterUser(string username, string password)
         {
             RegisterLoginUserModel newUser = new RegisterLoginUserModel();
             newUser.Username = username;
@@ -18,10 +19,24 @@ namespace CoreLibrary.Services
 
             using (var session = _factory.OpenSession())
             {
-                using (var transaction = session.BeginTransaction())
+               var user = session.QueryOver<RegisterLoginUserModel>()
+                .Where(u => u.Username == newUser.Username.Trim())
+                .List();
+
+                if (user.Count == 0)
                 {
-                    session.Save(newUser);
-                    transaction.Commit();
+                    using (var transaction = session.BeginTransaction())
+                    {
+                        session.Save(newUser);
+                        transaction.Commit();
+                    }
+                    UserModel registeredUser = new UserModel();
+                    registeredUser.Username = newUser.Username;
+                    return registeredUser;
+                }
+                else
+                {
+                    return null;
                 }
 
             }
