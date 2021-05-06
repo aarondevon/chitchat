@@ -8,3 +8,24 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+@media (min-width: 770px) {
+  #user-drop-right {
+    display: none;
+  }
+  #user-title {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 770px) {
+  #user-drop-right {
+    display: inline-block;
+  }
+  #user-title {
+    display: none;
+  }
+  #user-list {
+    display: none;
+  }
+}
