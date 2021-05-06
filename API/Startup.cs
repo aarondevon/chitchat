@@ -46,13 +46,13 @@ namespace API
             cfg.SetProperty(NHibernate.Cfg.Environment.ConnectionString, $"server={server};database={database};user id={userId};password={password};");
 
             // The path of the NHibernate configuration file
-            //var path = System.IO.Path.Combine(
-            // AppDomain.CurrentDomain.BaseDirectory,
-            // "hibernate.cfg.xml"
-            //);
+            var path = System.IO.Path.Combine(
+             AppDomain.CurrentDomain.BaseDirectory,
+             "hibernate.cfg.xml"
+            );
 
             // Adding NHibernate-related services
-            services.AddHibernate(cfg);
+            services.AddHibernate(path);
             services.AddMvc()
              .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
