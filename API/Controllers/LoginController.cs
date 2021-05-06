@@ -43,7 +43,8 @@ namespace API.Controllers
                     { "username", users[0].Username }
                 };
 
-                string secret = Environment.GetEnvironmentVariable("SECRET");
+                //string secret = Environment.GetEnvironmentVariable("SECRET");
+                string secret = "9z3j%mCFt3XZEi2UGJ3KBTaxgx&ZQEjQNJz4Su95x%ucaWuv#L%DFCoZAz6@";
 
                 IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // symmetric
                 IJsonSerializer serializer = new JsonNetSerializer();
