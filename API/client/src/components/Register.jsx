@@ -95,13 +95,7 @@ const Register = (props) => {
           props.history.push('homePage');
         },
         (error) => {
-          const resMessage = (error.response
-              && error.response.data
-              && error.response.data.message)
-            || error.message
-            || error.toString();
-
-          setMessage(resMessage);
+          setMessage(error.response.data.toString());
           setSuccessful(false);
         },
       );
