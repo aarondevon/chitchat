@@ -10,10 +10,10 @@ function ChatBox(props) {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
   };
   const displayMessages = () => {
-    console.log(props.messages);
     return props.messages.map((message) => {
       return (
         <Message
+          key={message.id}
           usernameId={message.user.username}
           message={message.message}
         />
