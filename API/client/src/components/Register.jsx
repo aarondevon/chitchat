@@ -65,7 +65,13 @@ const Register = (props) => {
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
-    setUsername(username.trim());
+    setUsername(username);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
   };
 
   // const onChangeEmail = (e) => {
@@ -125,6 +131,7 @@ const Register = (props) => {
                   className="form-control"
                   name="username"
                   value={username}
+                  onKeyDown={handleKeyDown}
                   onChange={onChangeUsername}
                   validations={[required, vusername]}
                 />
@@ -150,6 +157,7 @@ const Register = (props) => {
                   name="password"
                   value={password}
                   onChange={onChangePassword}
+                  onKeyDown={handleKeyDown}
                   validations={[required, vpassword]}
                 />
               </div>
