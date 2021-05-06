@@ -4,13 +4,13 @@
 import React from 'react';
 import {
   DropdownButton,
-  Dropdown,
+  // Dropdown,
 } from 'react-bootstrap';
 
 function UserList(props) {
   const displayUsers = () => {
     return props.users.map((user) => {
-      return <Dropdown className="list-group-item border-0" key={user.id}>{user.username}</Dropdown>;
+      return <li className="list-group-item border-0" key={user.id}>{user.username}</li>;
     });
   };
 
@@ -21,16 +21,17 @@ function UserList(props) {
         <ul id="user-list" className="list-group border">
           { displayUsers() }
         </ul>
+        <DropdownButton
+          id="user-drop-right"
+          drop="right"
+          variant="dark"
+          title="Users"
+        >
+          <ul id="user-drop-list">
+            { displayUsers() }
+          </ul>
+        </DropdownButton>
       </div>
-
-      <DropdownButton
-        id="user-drop-right"
-        drop="right"
-        variant="dark"
-        title="Users"
-      >
-        { displayUsers() }
-      </DropdownButton>
     </div>
   );
 }
