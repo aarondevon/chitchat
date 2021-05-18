@@ -19,8 +19,7 @@ namespace API.Controllers
     {
         private IMessageService _messages;
         private readonly IHubContext<MessageHub> _messageHub;
-        //private readonly string secret = Environment.GetEnvironmentVariable("SECRET");
-        string secret = "9z3j%mCFt3XZEi2UGJ3KBTaxgx&ZQEjQNJz4Su95x%ucaWuv#L%DFCoZAz6@";
+        private readonly string _secret = Environment.GetEnvironmentVariable("SECRET");
 
         public MessagesController(IMessageService messages, IHubContext<MessageHub> messageHub)
         {
@@ -33,7 +32,7 @@ namespace API.Controllers
         [Produces("application/json")]
         public IActionResult Get()
         {
-            //string secret = Environment.GetEnvironmentVariable("SECRET");
+
             Request.Headers.TryGetValue("Authorization", out var token);
 
             try
@@ -45,7 +44,7 @@ namespace API.Controllers
                 IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // symmetric
                 IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
 
-                var json = decoder.Decode(token, secret, verify: true);
+                var json = decoder.Decode(token, _secret, verify: true);
                 return Ok(_messages.getAllMessages());
             }
             catch (TokenExpiredException)
@@ -74,7 +73,7 @@ namespace API.Controllers
                 IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // symmetric
                 IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
 
-                var json = decoder.Decode(token, secret, verify: true);
+                var json = decoder.Decode(token, _secret, verify: true);
                 await _messageHub.Clients.All.SendAsync("sendToReact", message);
                 _messages.AddMessage(message.User.Id, message.Message);
                 return Ok();

@@ -20,8 +20,7 @@ namespace API.Controllers
     {
         private IUserService _users;
         private IRegisterUserService _registerUser;
-        //private readonly string secret = Environment.GetEnvironmentVariable("SECRET");
-        string secret = "9z3j%mCFt3XZEi2UGJ3KBTaxgx&ZQEjQNJz4Su95x%ucaWuv#L%DFCoZAz6@";
+        private readonly string _secret = Environment.GetEnvironmentVariable("SECRET");
 
         public UsersController(IUserService users, IRegisterUserService registerUser)
         {
@@ -44,7 +43,7 @@ namespace API.Controllers
                 IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // symmetric
                 IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
 
-                var json = decoder.Decode(token, secret, verify: true);
+                var json = decoder.Decode(token, _secret, verify: true);
                 return Ok(_users.GetAllUsers());
             }
             catch (TokenExpiredException)

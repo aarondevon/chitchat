@@ -19,6 +19,7 @@ namespace API.Controllers
     public class LoginController : ControllerBase
     {
         private ISessionFactory _factory;
+        private readonly string _secret = Environment.GetEnvironmentVariable("SECRET");
         public LoginController(ISessionFactory factory)
         {
             _factory = factory;
@@ -43,8 +44,7 @@ namespace API.Controllers
                     { "username", users[0].Username }
                 };
 
-                //string secret = Environment.GetEnvironmentVariable("SECRET");
-                string secret = "9z3j%mCFt3XZEi2UGJ3KBTaxgx&ZQEjQNJz4Su95x%ucaWuv#L%DFCoZAz6@";
+                
 
                 IJwtAlgorithm algorithm = new HMACSHA256Algorithm(); // symmetric
                 IJsonSerializer serializer = new JsonNetSerializer();
@@ -53,7 +53,7 @@ namespace API.Controllers
 
                 //var token = encoder.Encode(payload, secret);
                 var token = new TokenModel();
-                token.AccessToken = encoder.Encode(payload, secret);
+                token.AccessToken = encoder.Encode(payload, _secret);
                 Console.WriteLine(token);
 
                 return token;
