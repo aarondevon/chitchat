@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreLibrary", "CoreLibrary\CoreLibrary.csproj", "{9899E1B0-2FA7-4E04-ACFF-AB5A10E2652B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestChitChat", "TestChitChat\TestChitChat.csproj", "{864A824A-0726-417B-9E2A-EC04B27E8924}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,18 +41,6 @@ Global
 		{9899E1B0-2FA7-4E04-ACFF-AB5A10E2652B}.Release|x64.Build.0 = Release|Any CPU
 		{9899E1B0-2FA7-4E04-ACFF-AB5A10E2652B}.Release|x86.ActiveCfg = Release|Any CPU
 		{9899E1B0-2FA7-4E04-ACFF-AB5A10E2652B}.Release|x86.Build.0 = Release|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Debug|x64.Build.0 = Debug|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Debug|x86.Build.0 = Debug|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Release|Any CPU.Build.0 = Release|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Release|x64.ActiveCfg = Release|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Release|x64.Build.0 = Release|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Release|x86.ActiveCfg = Release|Any CPU
-		{864A824A-0726-417B-9E2A-EC04B27E8924}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
