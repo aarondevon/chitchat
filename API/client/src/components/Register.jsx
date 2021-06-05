@@ -98,7 +98,7 @@ const Register = (props) => {
           setMessage(response.data.message);
           setSuccessful(true);
           // eslint-disable-next-line react/prop-types
-          props.history.push('homePage');
+          props.history.push('/');
         },
         (error) => {
           setMessage(error.response.data.toString());
