@@ -5,7 +5,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 import React, { useState, useRef } from 'react';
-import { history, Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
@@ -54,6 +54,7 @@ const vpassword = (value) => {
 };
 
 const Register = (props) => {
+  const history = useHistory();
   const form = useRef();
   const checkBtn = useRef();
 
