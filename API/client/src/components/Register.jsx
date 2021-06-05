@@ -5,7 +5,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
 import React, { useState, useRef } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { history, Link } from 'react-router-dom';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
@@ -98,7 +98,7 @@ const Register = (props) => {
           setMessage(response.data.message);
           setSuccessful(true);
           // eslint-disable-next-line react/prop-types
-          props.history.push('/');
+          history.push('/');
         },
         (error) => {
           setMessage(error.response.data.toString());
